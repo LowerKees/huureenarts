@@ -25,6 +25,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: checkout repo
+      uses: actions/checkout@v2
+
     - name: azure login
       uses: azure/login@v1
       with:
@@ -42,4 +45,4 @@ jobs:
       uses: Azure/cli@v1
       with:
         inlineScript: |
-          az group deployment create --resource-group ${{ env.RSG_NAME }} --template-file $GITHUB_WORKSPACE/env/azuredeploy.vnet.json
+          az deployment group create --resource-group ${{ env.RSG_NAME }} --template-file $GITHUB_WORKSPACE/env/azuredeploy.vnet.json
