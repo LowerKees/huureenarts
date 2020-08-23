@@ -46,7 +46,7 @@
                             "serviceEndPoints": [
                                 {
                                     "service": "Microsoft.Web",
-                                    "location": "[resourceGroup().location]"
+                                    "locations": ["[resourceGroup().location]"]
                                 }
                             ],
                             "privateEndpointNetworkPolicies": "Enabled",
@@ -71,7 +71,7 @@
                             "serviceEndPoints": [
                                 {
                                     "service": "Microsoft.AzureCosmosDB",
-                                    "location": "[resourceGroup().location]"
+                                    "locations": ["[resourceGroup().location]"]
                                 }
                             ],
                             "privateEndpointNetworkPolicies": "Enabled",
