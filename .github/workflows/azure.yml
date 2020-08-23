@@ -22,25 +22,24 @@ env:
   NODE_VERSION: '10.x'                # set this to the node version to use
 
 jobs:
-  build-and-deploy:
-    name: Build and Deploy
+  deploy-env:
+    env:
+      RSG_NAME: rg-we-huureenarts-prod
+      RSG_SECRETS_NAME: rg-we-huureenarts-secrets-prod
+      DEFAULT_LOCATION: westeurope
+    name: deploy environment resources
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ env.NODE_VERSION }}
-      uses: actions/setup-node@v1
+
+    - name: deploy resource group
+      uses: Azure/cli@v1.0.0
       with:
-        node-version: ${{ env.NODE_VERSION }}
-    - name: npm install, build, and test
-      run: |
-        # Build and test the project, then
-        # deploy to Azure Web App.
-        npm install
-        npm run build --if-present
-        npm run test --if-present
-    - name: 'Deploy to Azure WebApp'
-      uses: azure/webapps-deploy@v2
-      with:
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+        # Specify the script here
+        inlineScript: 
+          az group create -n ${resourceGroupName} -l ${DEFAULT_LOCATION}
+          az group create -n ${resourceGroupSecretsName} -l ${DEFAULT_LOCATION}
+        azcliversion: latest
+        env:
+          RSG_NAME: ${{ jobs.deploy-env.env.RSG_NAME }}
+          RSG_SECRETS_NAME: ${{ jobs.deploy-env.env.RSG_SECRETS_NAME }}
+          DEFAULT_LOCATION: ${{ jobs.deploy-env.env.DEFAULT_LOCATION }}
