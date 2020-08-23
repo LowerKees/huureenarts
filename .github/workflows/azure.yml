@@ -29,15 +29,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
     - name: deploy resource group
       uses: Azure/cli@v1.0.0
       with:
         # Specify the script here
         inlineScript: 
-          az group create -n ${resourceGroupName} -l ${DEFAULT_LOCATION}
-          az group create -n ${resourceGroupSecretsName} -l ${DEFAULT_LOCATION}
+          az group create -n ${{ jobs.deploy-env.env.RSG_NAME }} -l ${{ jobs.deploy-env.env.DEFAULT_LOCATION }}
+          az group create -n ${{ jobs.deploy-env.env.RSG_SECRETS_NAME }} -l ${{ jobs.deploy-env.env.DEFAULT_LOCATION }}
         azcliversion: latest
-        env:
-          RSG_NAME: ${{ jobs.deploy-env.env.RSG_NAME }}
-          RSG_SECRETS_NAME: ${{ jobs.deploy-env.env.RSG_SECRETS_NAME }}
-          DEFAULT_LOCATION: ${{ jobs.deploy-env.env.DEFAULT_LOCATION }}
