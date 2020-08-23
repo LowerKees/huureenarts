@@ -31,10 +31,15 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: deploy resource group
-      uses: Azure/cli@v1.0.0
+      uses: Azure/cli@v1
       with:
-        # Specify the script here
-        inlineScript: 
-          az group create -n ${{ env.RSG_NAME }} -l ${{ env.DEFAULT_LOCATION }}
-          az group create -n ${{ env.RSG_SECRETS_NAME }} -l ${{ env.DEFAULT_LOCATION }}
+        inlineScript: |
+          az group create --name ${{ env.RSG_NAME }} --location ${{ env.DEFAULT_LOCATION }}
+          az group create --name ${{ env.RSG_SECRETS_NAME }} --location ${{ env.DEFAULT_LOCATION }}
         azcliversion: latest
+
+    # - name: deploy vnet
+    #   uses: Azure/cli@v1
+    #   with:
+    #     inlineScript: |
+    #     az group deployment create --resource-group ${{ env.RSG_NAME }} --template-file $GITHUB_WORKSPACE/env/azuredeploy.vnet.json
