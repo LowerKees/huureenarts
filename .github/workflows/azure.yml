@@ -15,16 +15,12 @@
 on: [push, pull_request]
 
 env:
-  AZURE_WEBAPP_NAME: your-app-name    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
-  NODE_VERSION: '10.x'                # set this to the node version to use
+  RSG_NAME: rg-we-huureenarts-prod
+  RSG_SECRETS_NAME: rg-we-huureenarts-secrets-prod
+  DEFAULT_LOCATION: westeurope               # set this to the node version to use
 
 jobs:
   deploy-env:
-    env:
-      RSG_NAME: rg-we-huureenarts-prod
-      RSG_SECRETS_NAME: rg-we-huureenarts-secrets-prod
-      DEFAULT_LOCATION: westeurope
     name: deploy environment resources
     runs-on: ubuntu-latest
     steps:
@@ -39,6 +35,6 @@ jobs:
       with:
         # Specify the script here
         inlineScript: 
-          az group create -n ${{ jobs.deploy-env.env.RSG_NAME }} -l ${{ jobs.deploy-env.env.DEFAULT_LOCATION }}
-          az group create -n ${{ jobs.deploy-env.env.RSG_SECRETS_NAME }} -l ${{ jobs.deploy-env.env.DEFAULT_LOCATION }}
+          az group create -n ${{ env.RSG_NAME }} -l ${{ env.DEFAULT_LOCATION }}
+          az group create -n ${{ env.RSG_SECRETS_NAME }} -l ${{ env.DEFAULT_LOCATION }}
         azcliversion: latest
