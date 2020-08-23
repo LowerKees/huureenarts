@@ -34,61 +34,60 @@
             "properties": {
                 "addressSpace": {
                     "addressPrefixes": [ "10.0.0.0/23" ]
-                }
-            },
-            "subnets": [
-                {
-                    "name": "[parameters('subnetFeName')]",
-                    "properties": {
-                        "networkSecurityGroup": {
-                            "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgFeName'))]"
-                        },
-                        "addressPrefix": "10.0.0.0/24",
-                        "serviceEndPoints": [
-                            {
-                                "service": "Microsoft.Web",
-                                "location": "[resourceGroup().location]"
-                            }
-                        ],
-                        "privateEndpointNetworkPolicies": "Enabled",
-                        "privateLinkServicNetworkPolicies": "Enabled",
-                        "delegations": [
-                            {
-                                "properties": {
-                                    "serviceName": "Microsoft.Web/serverFarms"
-                                },
-                                "name": "subnet-fe-del-serverfarms"
-                            }
-                        ]
-                    }
                 },
-                {
-                    "name": "[parameters('subnetBeName')]",
-                    "properties": {
-                        "networkSecurityGroup": {
-                            "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgBeName'))]"
-                        },
-                        "addressPrefix": "10.0.2.0/24",
-                        "serviceEndPoints": [
-                            {
-                                "service": "Microsoft.AzureCosmosDB",
-                                "location": "[resourceGroup().location]"
-                            }
-                        ],
-                        "privateEndpointNetworkPolicies": "Enabled",
-                        "privateLinkServicNetworkPolicies": "Enabled",
-                        "delegations": [
-                            {
-                                "properties": {
-                                    "serviceName": "Microsoft.Web/serverFarms"
-                                },
-                                "name": "subnet-be-del-serverfarms"
-                            }
-                        ]
+                "subnets": [
+                    {
+                        "name": "[parameters('subnetFeName')]",
+                        "properties": {
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgFeName'))]"
+                            },
+                            "addressPrefix": "10.0.0.0/24",
+                            "serviceEndPoints": [
+                                {
+                                    "service": "Microsoft.Web",
+                                    "location": "[resourceGroup().location]"
+                                }
+                            ],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServicNetworkPolicies": "Enabled",
+                            "delegations": [
+                                {
+                                    "properties": {
+                                        "serviceName": "Microsoft.Web/serverFarms"
+                                    },
+                                    "name": "subnet-fe-del-serverfarms"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "[parameters('subnetBeName')]",
+                        "properties": {
+                            "networkSecurityGroup": {
+                                "id": "[resourceId('Microsoft.Network/networkSecurityGroups', parameters('nsgBeName'))]"
+                            },
+                            "addressPrefix": "10.0.2.0/24",
+                            "serviceEndPoints": [
+                                {
+                                    "service": "Microsoft.AzureCosmosDB",
+                                    "location": "[resourceGroup().location]"
+                                }
+                            ],
+                            "privateEndpointNetworkPolicies": "Enabled",
+                            "privateLinkServicNetworkPolicies": "Enabled",
+                            "delegations": [
+                                {
+                                    "properties": {
+                                        "serviceName": "Microsoft.Web/serverFarms"
+                                    },
+                                    "name": "subnet-be-del-serverfarms"
+                                }
+                            ]
+                        }
                     }
-                }
-            ]
+                ]
+            }
         }
-
     ]
 }
