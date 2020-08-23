@@ -50,7 +50,7 @@
                                 }
                             ],
                             "privateEndpointNetworkPolicies": "Enabled",
-                            "privateLinkServicNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled",
                             "delegations": [
                                 {
                                     "properties": {
@@ -75,7 +75,7 @@
                                 }
                             ],
                             "privateEndpointNetworkPolicies": "Enabled",
-                            "privateLinkServicNetworkPolicies": "Enabled",
+                            "privateLinkServiceNetworkPolicies": "Enabled",
                             "delegations": [
                                 {
                                     "properties": {
