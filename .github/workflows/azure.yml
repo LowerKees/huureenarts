@@ -35,9 +35,9 @@ jobs:
         password: ${{ secrets.DOCKER_PWD }}
         repository: huureenarts
         tags: latest
-        path: $GITHUB_WORKSPACE
+        path: .
         # Path to the Dockerfile (Default is '{path}/Dockerfile')
-        dockerfile: huureenarts/client/Dockerfile
+        dockerfile: client/Dockerfile
 
   deploy-env:
     name: deploy environment resources
